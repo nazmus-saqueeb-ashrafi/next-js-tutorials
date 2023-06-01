@@ -15,3 +15,16 @@ Day 1
 - use Metadata to optimize SEO (in page.tsx or layout.tsx)
 - use loading.tsx to create a loading state (uses react suspense under the hood)
 - in error.tsx we define the error boundaries.
+
+Day 2
+
+Steps to fetch data
+
+- make a folder called lib and in it write a function to fetch data and return in json format (getAllUsers())
+
+- define data type in a file called types.d.ts (User)
+
+- pull in data in the static page
+
+const usersData: Promise<User[]> = getAllUsers()
+const users = await usersData
