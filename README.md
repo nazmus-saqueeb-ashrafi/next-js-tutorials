@@ -28,3 +28,53 @@ Steps to fetch data
 
 const usersData: Promise<User[]> = getAllUsers()
 const users = await usersData
+
+Day 3
+
+Dynamic pages --------------
+
+- make a folder like [userId]
+- in folder create page.tsx
+
+type Params = {
+params:{
+userId : string
+}
+}
+
+export default async function UserPage({params:{userId}}: Params) {...}
+
+Request data in parallel ------------
+
+- we can request data in parallel (ie not waterfall - one after other)
+
+const userData: Promise<User> = getUser(userId)
+const userPostsData: Promise<Post[]> = getUserPosts(userId)
+
+const [user, userPosts] = await Promise.all([userData,userPostData])
+
+Passing Props through Function ------------
+
+- getUserPosts(userId)
+- export default async function getUserPosts(userId : string) {...}
+
+Progressively render pages using suspense ------------
+
+- We can progressively render the page, and incrementally sho wcontent to the user, while rest of the content loads
+- To do this we have to pass a promise to the component we want to load progressively
+- Note that data will still be loaded in parallel
+
+<Suspense fallback={<h2>Loading....</h2>}>
+<UserPosts promise = {userPostsData}/>
+</Suspense>
+
+Pass a promise to a component ------------
+
+- <UserPosts promise = {userPostsData}/>
+- type Props = {
+  promise: Promise<Post[]>
+  }
+  export default async function UserPosts({promise}: Props) {
+  const posts = await promise
+  ....
+  }
