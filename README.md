@@ -78,3 +78,19 @@ Pass a promise to a component ------------
   const posts = await promise
   ....
   }
+
+Day 4
+
+Creating dynamic metadata ------------
+
+- use Promise<Metadata> to create dynamic metadata
+
+- export async function generateMetadata({params:{userId}}: Params) : Promise<Metadata> {
+  const userData: Promise<User> = getUser(userId)
+  const user = await userData
+
+  return {
+  title: user.name,
+  description: `This is a page for ${user.name}`
+  }
+  }
