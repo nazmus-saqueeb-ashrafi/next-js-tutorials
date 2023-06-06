@@ -13,7 +13,7 @@ export default async function page() {
             <Link href={'/'}> Link to Home Page</Link>
             <br></br>
             {users.map(user=>{
-                return <Link href={`users/${user.id}`}><h2>{user.name}</h2></Link>
+                return <Link key={user.id} href={`users/${user.id}`}><h2>{user.name}</h2></Link>
             })}
         </section>
     )

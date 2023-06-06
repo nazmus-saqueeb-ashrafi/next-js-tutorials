@@ -94,3 +94,45 @@ Creating dynamic metadata ------------
   description: `This is a page for ${user.name}`
   }
   }
+
+Day 5
+
+Static renders vs serverside renders ------------
+
+- static pages are build on the server, and then sent to content delivery networks. They are statically generated.
+- server side rendered pages are build at request time on the server, then send to the client.
+- check using 'npm run build'
+
+Caching ------------
+
+- To cache one time loaded page
+  const res = await fetch("...",{cache:"force-cache"})
+
+- do not cache
+  {cache:'no-store'}
+- incremental static regeneration (ISR) every 60 seconds
+  {next:{revalideate:60}}
+- check 'segment-level caching' in Next docs to make caching possible at different levels
+
+SSR vs SSG ------------
+
+- SSR (static site rendering)
+- SSG (static site generation)
+- SSG pages are generated in advance and is the recommended solution
+- check generateStaticParam() method at 1:32:20 of Dave Grays video
+
+404 Not found pages ------------
+
+- function generateMetadata{
+  if(!user.name) {
+  return {
+  title:"No user at this location"
+  }
+  }
+  }
+
+- if(!user.name) return notFound()
+- notFound() is imported from Next
+- no error to be thrown when fetching data ( functions in lib folder)
+- to create custom not found page create "not-found.tsx"
+  1:41:20 of Dave Grays video
